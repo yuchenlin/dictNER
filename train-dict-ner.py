@@ -105,6 +105,17 @@ def label_test(testflie, entity_dic):
             most_common_type_dict[name] = most_common_type(entity_dic[name])
         print("most common type dict... Done!")
 
+
+        sents = []
+        for l in lines:
+            ls = l.split(" ")
+            if len(l.split()) >= 2:
+                cur_sent.append(ls[0])
+            else:
+                sents.append(cur_cnt)
+        len_sents = len((sents))
+
+        cur_sent = []
         for line in lines:
             line = line.strip()
             if len(line) > 0:
@@ -123,7 +134,7 @@ def label_test(testflie, entity_dic):
                     result += "\n"
                     cur_cnt += 1
                     if cur_cnt % 100 == 0:
-                        print("---%d out of %d"%(cur_cnt, lines.count("\n")))
+                        print("---%d out of %d" % (cur_cnt, len_sents))
                         # if cur_cnt == 500:
                         #     break
                 cur_sent = []
