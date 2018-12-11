@@ -118,8 +118,8 @@ def label_test(testflie, entity_dic):
                     cur_cnt += 1
                     if cur_cnt % 100 == 0:
                         print("---%d out of %d"%(cur_cnt, lines.count("\n")))
-                        if cur_cnt == 500:
-                            break
+                        # if cur_cnt == 500:
+                        #     break
                 cur_sent = []
                 cur_truth = []
                 # to process
