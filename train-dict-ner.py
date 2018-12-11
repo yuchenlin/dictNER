@@ -1,6 +1,6 @@
 import sys
 import os
-from collections import Counter 
+from collections import Counter
 train_file = sys.argv[1]
 test_file = sys.argv[2]
 
