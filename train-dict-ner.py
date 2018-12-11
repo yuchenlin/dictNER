@@ -1,10 +1,8 @@
 import sys
 import os
-from collections import Counter
-train_file = "/Users/yuchenlin/Documents/GitHub/neural-symbolic-ner/RuleNER/onto.train.ner.names"
-test_file = "/Users/yuchenlin/Documents/GitHub/neural-symbolic-ner/RuleNER/onto.test.ner.names"
-# train_file = sys.argv[1]
-# test_file = sys.argv[2]
+from collections import Counter 
+train_file = sys.argv[1]
+test_file = sys.argv[2]
 
 type_frequence = dict()
 most_common_type_dict = dict()
