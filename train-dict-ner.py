@@ -3,8 +3,8 @@ import os
 from collections import Counter
 train_file = "/Users/yuchenlin/Documents/GitHub/neural-symbolic-ner/RuleNER/onto.train.ner.names"
 test_file = "/Users/yuchenlin/Documents/GitHub/neural-symbolic-ner/RuleNER/onto.test.ner.names"
-train_file = sys.argv[1]
-test_file = sys.argv[2]
+# train_file = sys.argv[1]
+# test_file = sys.argv[2]
 
 type_frequence = dict()
 most_common_type_dict = dict()
@@ -105,17 +105,17 @@ def label_test(testflie, entity_dic):
             most_common_type_dict[name] = most_common_type(entity_dic[name])
         print("most common type dict... Done!")
 
-
-        sents = []
-        for l in lines:
-            if len(l) > 0:
-                ls = l.strip()
+        len_sents = 0
+        for line in lines:
+            line = line.strip()
+            if len(line) > 0:
+                ls = line.split()
                 cur_sent.append(ls[0])
             else:
-                if len(cur_sent)>0:
-                    sents.append(cur_sent)
+                if len(cur_sent) > 0:
+                    len_sents += 1
                 cur_sent = []
-        len_sents = len((sents))
+                # to process
 
         cur_sent = []
         for line in lines:
@@ -152,7 +152,7 @@ print("start labeling")
 res = label_test(test_file, train_entity_dic)
 print("done labeling")
 
-with open("tmp.res", 'w') as f:
+with open("tmp.res", 'w', encoding="utf8") as f:
     f.write(res)
 os.system("./conlleval < tmp.res")
 # print(simple_label(["A", "B", "C", "D","E"], pred=["O","O","O","O","B-PER"],name="B C D", tag = "ass"))
