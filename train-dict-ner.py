@@ -108,11 +108,12 @@ def label_test(testflie, entity_dic):
 
         sents = []
         for l in lines:
-            ls = l.split(" ")
+            ls = l.strip().split(" ")
             if len(l.split()) >= 2:
                 cur_sent.append(ls[0])
             else:
-                sents.append(cur_cnt)
+                if len(cur_sent)>0:
+                    sents.append(cur_sent)
         len_sents = len((sents))
 
         cur_sent = []
