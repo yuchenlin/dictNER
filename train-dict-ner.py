@@ -7,6 +7,7 @@ train_file = sys.argv[1]
 test_file = sys.argv[2]
 
 type_frequence = dict()
+most_common_type_dict = dict()
 
 def get_entity_dic(filename):
     train_entity_dic = dict()
@@ -77,7 +78,7 @@ def label_sent(sent, entity_dic):
     pred = ["O"]*len(sent)
     for name in entity_dic:
         #  exactly match the span in the test sentence (case sensitive)
-        tag = most_common_type(entity_dic[name])
+        tag = most_common_type_dict[name]
         pred = simple_label(sent, pred, name, tag)
     return pred
 
@@ -98,6 +99,11 @@ def label_test(testflie, entity_dic):
             if name not in corpus:
                 del entity_dic[name]
         print("done deleting current size: %d"%(len(entity_dic)))
+
+        print("building most common type dict")
+        for name in entity_dic:
+            most_common_type_dict[name] = most_common_type(entity_dic[name])
+        print("most common type dict... Done!")
 
         for line in lines:
             line = line.strip()
