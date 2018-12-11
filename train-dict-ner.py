@@ -114,7 +114,7 @@ def label_test(testflie, entity_dic):
             else:
                 if len(cur_sent)>0:
                     sents.append(cur_sent)
-                    cur_sent = []
+                cur_sent = []
         len_sents = len((sents))
 
         cur_sent = []
