@@ -4,8 +4,8 @@ from collections import Counter
 train_file = sys.argv[1]
 test_file = sys.argv[2]
 
-type_frequence = dict()
-most_common_type_dict = dict()
+type_freq = dict()
+name2type = dict()
 
 def get_entity_dic(filename):
     train_entity_dic = dict()
@@ -34,9 +34,9 @@ def get_entity_dic(filename):
                     if cur_ent not in train_entity_dic:
                         train_entity_dic[cur_ent] = []
                     train_entity_dic[cur_ent].append(cur_tag)
-                    if cur_tag not in type_frequence:
-                        type_frequence[cur_tag] = 0
-                    type_frequence[cur_tag] += 1
+                    if cur_tag not in type_freq:
+                        type_freq[cur_tag] = 0
+                    type_freq[cur_tag] += 1
                 cur_tag = None
                 cur_ent = None
 
@@ -47,14 +47,13 @@ def get_entity_dic(filename):
 def most_common_type(lst):
     cnt = Counter(lst)
     top3 = cnt.most_common(3)
-    most_common_type = top3[0][0]
+    final_type = top3[0][0]
     # deal with tie by global frequency
-
-    if len(top3)>=2 and top3[1][0] == top3[0][0] and type_frequence[top3[1][1]] > type_frequence[most_common_type]:
-        most_common_type = top3[1][1]
-    if len(top3)>=3 and top3[2][0] == top3[0][0] and type_frequence[top3[2][1]] > type_frequence[most_common_type]:
-        most_common_type = top3[2][1]
-    return most_common_type
+    if len(top3) >= 2 and top3[1][0] == top3[0][0] and type_freq[top3[1][1]] > type_freq[final_type]:
+        final_type = top3[1][1]
+    if len(top3) >= 3 and top3[2][0] == top3[0][0] and type_freq[top3[2][1]] > type_freq[final_type]:
+        final_type = top3[2][1]
+    return final_type
 
 
 
@@ -72,13 +71,15 @@ def simple_label(sent, pred, name, tag):
                 pred[i] = "I-" + tag
     return pred
 
+
 def label_sent(sent, entity_dic):
     pred = ["O"]*len(sent)
     for name in entity_dic:
         #  exactly match the span in the test sentence (case sensitive)
-        tag = most_common_type_dict[name]
+        tag = name2type[name]
         pred = simple_label(sent, pred, name, tag)
     return pred
+
 
 def label_test(testflie, entity_dic):
     result = ""
@@ -100,9 +101,10 @@ def label_test(testflie, entity_dic):
 
         print("building most common type dict")
         for name in entity_dic:
-            most_common_type_dict[name] = most_common_type(entity_dic[name])
+            name2type[name] = most_common_type(entity_dic[name])
         print("most common type dict... Done!")
 
+        # counting number of sentences
         len_sents = 0
         for line in lines:
             line = line.strip()
@@ -113,8 +115,8 @@ def label_test(testflie, entity_dic):
                 if len(cur_sent) > 0:
                     len_sents += 1
                 cur_sent = []
-                # to process
 
+        # start labeling
         cur_sent = []
         for line in lines:
             line = line.strip()
@@ -125,8 +127,6 @@ def label_test(testflie, entity_dic):
             else:
                 assert len(cur_sent) == len(cur_truth)
                 if len(cur_sent) > 0:
-                    # print(cur_sent)
-                    # print(cur_truth)
                     pred = label_sent(cur_sent, entity_dic)
                     assert len(pred) == len(cur_truth)
                     for i in range(len(pred)):
@@ -135,11 +135,8 @@ def label_test(testflie, entity_dic):
                     cur_cnt += 1
                     if cur_cnt % 100 == 0:
                         print("---%d out of %d" % (cur_cnt, len_sents))
-                        # if cur_cnt == 500:
-                        #     break
                 cur_sent = []
                 cur_truth = []
-                # to process
     return result
 
 
@@ -153,5 +150,5 @@ print("done labeling")
 with open("tmp.res", 'w', encoding="utf8") as f:
     f.write(res)
 os.system("./conlleval < tmp.res")
-# print(simple_label(["A", "B", "C", "D","E"], pred=["O","O","O","O","B-PER"],name="B C D", tag = "ass"))
+
 
