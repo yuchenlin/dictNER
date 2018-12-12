@@ -1,6 +1,12 @@
-# dictNER
+# dictNER: a simple dictionary-based method for NER
 
-``python train-dict-ner.py ../NCRFpp/on_data_names/onto.train.ner.names ../NCRFpp/on_data_names/onto.test.ner.names``
+This script collects an entity dictionary from the training data and directly uses the dictionary to label the testing sentences. It is useful when one would like to know how well this simple method can work on a NER data set. We show the results on some well-known NER datasets.
+
+## Usage:
+``python train-dict-ner.py /path/to/training_data /path/to/training/test_data``
+
+
+## Results: 
 
 - CoNLL 2003 English NER
 
