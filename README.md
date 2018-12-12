@@ -1,6 +1,6 @@
 # dictNER: a simple dictionary-based method for NER
 
-This script collects an entity dictionary from the training data and directly uses the dictionary to label the testing sentences. It is useful when one would like to know how well this simple method can work on a NER data set. We show the results on some well-known NER datasets.
+This script collects an entity dictionary from the training data and blindly uses the dictionary to label the testing sentences. It is useful when one would like to know how well this simple method can work on a NER data set. We show the results on some well-known NER datasets.
 
 ## Usage:
 ``python train-dict-ner.py /path/to/training_data /path/to/test_data``
