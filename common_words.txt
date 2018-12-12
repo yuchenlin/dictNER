@@ -334,7 +334,6 @@ briefly
 bright
 brilliant
 bring
-British
 broad
 broken
 brother
@@ -393,7 +392,6 @@ cast
 cat
 catch
 category
-Catholic
 cause
 ceiling
 celebrate
@@ -706,7 +704,6 @@ deliver
 delivery
 demand
 democracy
-Democrat
 democratic
 demonstrate
 demonstration
@@ -926,7 +923,6 @@ estimate
 etc
 ethics
 ethnic
-European
 evaluate
 evaluation
 even
@@ -1394,7 +1390,6 @@ interested
 interesting
 internal
 international
-Internet
 interpret
 interpretation
 intervention
@@ -2260,7 +2255,6 @@ run
 running
 rural
 rush
-Russian
 sacred
 sad
 safe
@@ -2461,7 +2455,6 @@ soup
 source
 south
 southern
-Soviet
 space
 speak
 speaker
