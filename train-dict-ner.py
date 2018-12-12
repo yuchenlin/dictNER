@@ -6,6 +6,7 @@ test_file = sys.argv[2]
 
 type_freq = dict()
 name2type = dict()
+common_words = set(open("common_words.txt", 'r').read().split())
 
 def get_entity_dic(filename):
     train_entity_dic = dict()
@@ -95,7 +96,7 @@ def label_test(testflie, entity_dic):
         print("deleting empty entity; current size: %d"%(len(entity_dic)))
         entity_names = list(entity_dic.keys())
         for name in entity_names:
-            if name not in corpus:
+            if name not in corpus or name in common_words:
                 del entity_dic[name]
         print("done deleting current size: %d"%(len(entity_dic)))
 

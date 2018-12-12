@@ -22,19 +22,19 @@ accuracy:  89.30%; precision:  72.14%; recall:  47.45%; FB1:  57.25
 - OntoNotes 5.0 NER (11 names)
 
 ```angular2html
-processed 230118 tokens with 8446 phrases; found: 61778 phrases; correct: 4750.
-accuracy:  73.37%; precision:   7.69%; recall:  56.24%; FB1:  13.53
-            EVENT: precision:  25.22%; recall:  34.12%; FB1:  29.00  115
-              FAC: precision:   9.03%; recall:   9.40%; FB1:   9.21  155
-              GPE: precision:  16.05%; recall:  81.62%; FB1:  26.82  12950
-         LANGUAGE: precision:   2.50%; recall:  40.91%; FB1:   4.71  360
-              LAW: precision:  19.35%; recall:  13.64%; FB1:  16.00  31
-              LOC: precision:  13.63%; recall:  35.81%; FB1:  19.74  565
-             NORP: precision:   3.71%; recall:  84.85%; FB1:   7.11  22653
-              ORG: precision:  18.23%; recall:  37.31%; FB1:  24.50  4097
-           PERSON: precision:   4.37%; recall:  41.94%; FB1:   7.92  20473
-          PRODUCT: precision:  21.43%; recall:  30.00%; FB1:  25.00  126
-      WORK_OF_ART: precision:  11.07%; recall:  16.57%; FB1:  13.27  253
+processed 230118 tokens with 8446 phrases; found: 10983 phrases; correct: 4522.
+accuracy:  94.76%; precision:  41.17%; recall:  53.54%; FB1:  46.55
+            EVENT: precision:  41.11%; recall:  43.53%; FB1:  42.29  90
+              FAC: precision:  22.95%; recall:   9.40%; FB1:  13.33  61
+              GPE: precision:  57.59%; recall:  80.60%; FB1:  67.18  3563
+         LANGUAGE: precision:  47.37%; recall:  40.91%; FB1:  43.90  19
+              LAW: precision:  10.91%; recall:  13.64%; FB1:  12.12  55
+              LOC: precision:  22.09%; recall:  33.49%; FB1:  26.62  326
+             NORP: precision:  58.61%; recall:  59.80%; FB1:  59.20  1010
+              ORG: precision:  33.65%; recall:  39.46%; FB1:  36.32  2348
+           PERSON: precision:  28.54%; recall:  42.08%; FB1:  34.01  3147
+          PRODUCT: precision:  17.54%; recall:  22.22%; FB1:  19.61  114
+      WORK_OF_ART: precision:  12.80%; recall:  18.93%; FB1:  15.27  250
 ```
 
 
@@ -79,3 +79,8 @@ accuracy:  90.83%; precision:  47.73%; recall:   9.67%; FB1:  16.09
        sportsteam: precision:  15.38%; recall:   1.36%; FB1:   2.50  13
            tvshow: precision:   0.00%; recall:   0.00%; FB1:   0.00  0
 ```
+
+## Notes
+
+- when an entity has multiple types in the training data, we consider it to be of the most common type (when there is a tie, we take the most globally frequent one)
+- the results can be different using python 3.5.x and 3.6/7.x. We use python 3.7.x to run the script.
